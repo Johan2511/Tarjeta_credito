@@ -43,7 +43,7 @@ const Formulario = () => {
 
         <div className='container-input'>
           <label>Número de tarjeta</label>
-          <input type="text" onChange={onChanceNumeroTarjeta} />
+          <input type="text" maxLength={16} onChange={onChanceNumeroTarjeta} />
         </div>
         <div className='container-input'>
           <label>Nombre de tarjeta</label>
@@ -53,11 +53,11 @@ const Formulario = () => {
         <div className='Container_input_fecha_ccv'>
           <div className='container-input'>
             <label>Fecha de expiración</label>
-            <input type="text" onChange={onChanceFechaExpiracionTarjeta} />
+            <input type="text" maxLength={5} onChange={onChanceFechaExpiracionTarjeta} />
           </div>
           <div className='container-input'>
             <label>CCV</label>
-            <input type="text" onChange={onChanceCcvTarjeta} />
+            <input type="text" maxLength={3} onChange={onChanceCcvTarjeta} />
           </div>
         </div>
 

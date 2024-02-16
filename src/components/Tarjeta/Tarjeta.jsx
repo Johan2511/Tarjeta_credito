@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import ImgChip from '../../assets/tarjeta-de-credito.png'
-import './Tarjeta.css'
+import { useEffect ,useState } from 'react';
+import ImgChip from '../../assets/tarjeta-de-credito.png';
+import './Tarjeta.css';
 
 const Tarjeta = ({
     numeroTarjeta,
@@ -10,6 +10,19 @@ const Tarjeta = ({
 }) => {
 
 const [changePosition , setChangePosition] = useState(false);
+
+
+
+useEffect ( ()=> {
+    if (numeroCcv.length > 0) {
+        setChangePosition(true)
+    } else if (numeroCcv.length === 0) {
+        setChangePosition(false)
+    }
+},
+[numeroCcv])
+
+
 
   return (
     <>
@@ -48,7 +61,7 @@ const [changePosition , setChangePosition] = useState(false);
             <div className='Card-back'>
                 <div className='strip'></div>
                 <div className='Container_CCV'>
-                    <div className='mstrip'></div>
+                    <div className='mstrip'>{nombreTarjeta && nombreTarjeta.length > 0 ? nombreTarjeta :"JOHN DOE"}</div>
                     <p className='ccv'>{numeroCcv && numeroCcv.length > 0 ? numeroCcv : "---"} </p>
                 </div>
             </div>
