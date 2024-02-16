@@ -2,7 +2,12 @@ import { useState } from 'react'
 import ImgChip from '../../assets/tarjeta-de-credito.png'
 import './Tarjeta.css'
 
-const Tarjeta = () => {
+const Tarjeta = (
+    numeroTarjeta,
+    nombreTarjeta,
+    fechaExpiracion,
+    numeroCcv
+) => {
 
 const [changePosition , setChangePosition] = useState(false);
 
