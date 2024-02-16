@@ -35,7 +35,7 @@ const Tarjeta = () => {
             {/* Parte trasera de la tarjeta */}
 
             <div className='Card-back'>
-                <div className='Strip'></div>
+                <div className='strip'></div>
                 <div className='Container_CCV'>
                     <div className='mstrip'></div>
                     <p className='ccv'>---</p>
