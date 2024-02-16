@@ -1,10 +1,16 @@
+import { useState } from 'react'
 import ImgChip from '../../assets/tarjeta-de-credito.png'
 import './Tarjeta.css'
 
 const Tarjeta = () => {
+
+const [changePosition , setChangePosition] = useState(false);
+
   return (
     <>
-        <div className='flip-card'>
+        <div 
+        onClick={() => setChangePosition(!changePosition)} 
+        className={`flip-card${changePosition ? " Voltear" : ""}`}>
             <div className='flip-card-inner'>
 
                 {/* Parte Delantera de la tarjeta */}
