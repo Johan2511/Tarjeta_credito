@@ -95,3 +95,30 @@
     top: 2.4em;
     background: repeating-linear-gradient(45deg, #303030, #303030 10px , #202020 10px, #202020 20px) ;
 }
+
+.mstrip {
+    background:  repeating-linear-gradient(
+    skyblue 0,
+    skyblue 3px,
+    orange 3px,
+    orange 5px    );
+    width: 65%;
+    height: 30px;
+    border-radius:2.5px;
+}
+
+.Container_CCV {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px;
+}
+
+.ccv {
+    background-color: white;
+    width: 30%;
+    height: 30px;
+    color: black;
+    font-size: 16px;
+    border-radius:2.5px;
+}
