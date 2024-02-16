@@ -64,7 +64,8 @@
 .Label {
     font-size: 15px;
     color:#7d8999;
-    margin-bottom: 0;
+    margin-bottom:5px;
+    margin-top: 0;
 }
 
 .Card-front .groups .Number,
@@ -73,15 +74,16 @@
     color: white;
     font-size: 16px;
     text-transform: uppercase;
-    margin-top: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 
-.groups {
+.Card-front .groups {
     display: flex;
     flex-direction: column;
     align-items: start;
-    margin: 10px;
+    margin: 15px;
 }
 
 .Data {
@@ -91,9 +93,11 @@
 
 }
 
-.FlexBox {
+.Card-front .FlexBox {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 

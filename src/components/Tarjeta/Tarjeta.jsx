@@ -2,12 +2,12 @@ import { useState } from 'react'
 import ImgChip from '../../assets/tarjeta-de-credito.png'
 import './Tarjeta.css'
 
-const Tarjeta = (
+const Tarjeta = ({
     numeroTarjeta,
     nombreTarjeta,
     fechaExpiracion,
     numeroCcv
-) => {
+}) => {
 
 const [changePosition , setChangePosition] = useState(false);
 
@@ -28,17 +28,17 @@ const [changePosition , setChangePosition] = useState(false);
                 <div className='Data'></div>
                 <div className='groups'>
                     <p className='Label'>Número de la Tarjeta</p>
-                    <p className='Number'>#### #### #### ####</p>
+                    <p className='Number'>{numeroTarjeta && numeroTarjeta.length > 0 ? numeroTarjeta : "#### #### #### ####"}</p>
                 </div>
 
                 <div className='FlexBox'>
                     <div className='groups'>
                         <p className='Label'>Nombre de La Tarjeta</p>
-                        <p className='Name'>JOHN DOE</p>
+                        <p className='Name'>{nombreTarjeta && nombreTarjeta.length > 0 ? nombreTarjeta :"JOHN DOE"}</p>
                     </div>
                     <div className='groups'>
                         <p className='Label'>Expiración</p>
-                        <p className='Expiration'>MM/AA</p>
+                        <p className='Expiration'>{fechaExpiracion && fechaExpiracion.length > 0 ? fechaExpiracion : "MM/AA"}</p>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@ const [changePosition , setChangePosition] = useState(false);
                 <div className='strip'></div>
                 <div className='Container_CCV'>
                     <div className='mstrip'></div>
-                    <p className='ccv'>---</p>
+                    <p className='ccv'>{numeroCcv && numeroCcv.length > 0 ? numeroCcv : "---"} </p>
                 </div>
             </div>
 
