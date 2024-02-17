@@ -12,7 +12,7 @@ const Navbar = () => {
         <ul className='flex items-center gap-3'>
             <li className='font-extrabold text-lg'>
                 <NavLink to='/'>
-                    Shopi
+                    Hardware Signals
                 </NavLink>
             </li>
             <li>

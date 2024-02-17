@@ -7,6 +7,7 @@ import MyOrders from '../Myorders'
 import NotFound from '../NotFound'
 import SignIn from '../SignIn'
 import Navbar from '../../components/Navbar'
+import Modal from '../../components/Modal/Modal'
 import Formulario from '../../components/Formulario/Formulario'
 import './App.css'
 
@@ -32,6 +33,7 @@ function App() {
       <BrowserRouter>
         <AppRoutes />
         <Navbar />
+        <Modal />
       </BrowserRouter>
     </ShoopingCartProvider>
     </>
