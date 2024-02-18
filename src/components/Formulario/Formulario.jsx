@@ -8,6 +8,26 @@ const Formulario = () => {
   const [nombreTarjeta, setNombreTarjeta] = useState("")
   const [fechaExpiracion , setFechaExpiracion] = useState("")
   const [numeroCcv , setNumeroCcv] = useState("")
+  const [resultadoValidacion, setResultadoValidacion] = useState(null);
+
+  const simularValidacionBackend = () => {
+    // Simulación simple: verifica que el número de tarjeta tenga 16 dígitos
+    // y que el CCV tenga 3 dígitos. 
+    const datosTarjetaValida = {
+      numeroTarjeta: '1234567812345678', // Cambia esto con un número de tarjeta real
+      nombreTarjeta: 'Johan Mauricio Peñuela Hidalgo', // Cambia esto con un nombre real
+      fechaExpiracion: '12/25', // Cambia esto con una fecha de expiración real
+      numeroCcv: '123', // Cambia esto con un CCV real
+    };
+
+    const esValido =
+      numeroTarjeta === datosTarjetaValida.numeroTarjeta &&
+      nombreTarjeta === datosTarjetaValida.nombreTarjeta &&
+      fechaExpiracion === datosTarjetaValida.fechaExpiracion &&
+      numeroCcv === datosTarjetaValida.numeroCcv;
+
+    return esValido;
+  };
 
 
   const onChanceNumeroTarjeta =(event) => {
@@ -30,12 +50,20 @@ const Formulario = () => {
     setNumeroCcv(nuevoNumeroCcv)
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
+    // Simulamos la validación del backend
+    const esValidacionExitosa = simularValidacionBackend();
+
+    // Actualizamos el estado para reflejar el resultado de la validación
+    setResultadoValidacion(esValidacionExitosa);
+  };
 
   
   return (
     <>
-    <form>
+    <form onSubmit={handleSubmit}>
       <Tarjeta 
         numeroTarjeta={numeroTarjeta}
         nombreTarjeta={nombreTarjeta}
@@ -67,7 +95,11 @@ const Formulario = () => {
           <Button text={"Enviar"}/>
 
     </form>
-
+    {resultadoValidacion !== null && (
+        <div className={` text-center mt-4 p-4 ${resultadoValidacion ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+          {resultadoValidacion ? '¡La validación fue exitosa!' : 'La validación falló. Verifica tus datos.'}
+        </div>
+      )}
     </>
   )
 }
