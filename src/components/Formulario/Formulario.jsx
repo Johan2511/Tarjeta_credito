@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Button from '../Button/Button'
 import Tarjeta from '../Tarjeta/Tarjeta'
+import Spinner from '../Spinner/Spinner'
 import './Formulario.css'
 
 const Formulario = () => {
@@ -9,6 +10,7 @@ const Formulario = () => {
   const [fechaExpiracion , setFechaExpiracion] = useState("")
   const [numeroCcv , setNumeroCcv] = useState("")
   const [resultadoValidacion, setResultadoValidacion] = useState(null);
+  const [cargando, setCargando] = useState(false);
 
   const simularValidacionBackend = () => {
     // Simulación simple: verifica que el número de tarjeta tenga 16 dígitos
@@ -50,14 +52,23 @@ const Formulario = () => {
     setNumeroCcv(nuevoNumeroCcv)
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Iniciar el spinner
+    setCargando(true);
+
+    // Simular la validación del backend después de un tiempo (para simular una solicitud asíncrona)
+    await new Promise(resolve => setTimeout(resolve, 2000));
 
     // Simulamos la validación del backend
     const esValidacionExitosa = simularValidacionBackend();
 
     // Actualizamos el estado para reflejar el resultado de la validación
     setResultadoValidacion(esValidacionExitosa);
+
+    // Detener el spinner
+    setCargando(false);
   };
 
   
@@ -95,7 +106,10 @@ const Formulario = () => {
           <Button text={"Enviar"}/>
 
     </form>
-    {resultadoValidacion !== null && (
+
+    {cargando && <Spinner />}
+
+    {resultadoValidacion !== null && !cargando && (
         <div className={` text-center mt-4 p-4 ${resultadoValidacion ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
           {resultadoValidacion ? '¡La validación fue exitosa!' : 'La validación falló. Verifica tus datos.'}
         </div>
