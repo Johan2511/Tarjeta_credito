@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Button from '../Button/Button'
 import Tarjeta from '../Tarjeta/Tarjeta'
 import './Formulario.css'
 
@@ -63,7 +64,7 @@ const Formulario = () => {
           </div>
         </div>
 
-          <button>Enviar</button>
+          <Button text={"Enviar"}/>
 
     </form>
 
