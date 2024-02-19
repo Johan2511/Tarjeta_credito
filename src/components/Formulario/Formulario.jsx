@@ -1,85 +1,75 @@
-import { useState } from 'react'
-import Button from '../Button/Button'
-import Tarjeta from '../Tarjeta/Tarjeta'
-import Spinner from '../Spinner/Spinner'
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  actualizarCampo,
+  iniciarCarga,
+  finalizarCarga,
+  actualizarResultadoValidacion,
+} from '../../Redux/FormularioSlice';
+import Button from '../Button/Button';
+import Tarjeta from '../Tarjeta/Tarjeta';
+import Spinner from '../Spinner/Spinner';
 import './Formulario.css'
 
 const Formulario = () => {
-  const [numeroTarjeta, setNumeroTarjeta] = useState("")
-  const [nombreTarjeta, setNombreTarjeta] = useState("")
-  const [fechaExpiracion , setFechaExpiracion] = useState("")
-  const [numeroCcv , setNumeroCcv] = useState("")
-  const [resultadoValidacion, setResultadoValidacion] = useState(null);
-  const [cargando, setCargando] = useState(false);
+  const dispatch = useDispatch();
+  const {
+    numeroTarjeta,
+    nombreTarjeta,
+    fechaExpiracion,
+    numeroCcv,
+    resultadoValidacion,
+    cargando,
+  } = useSelector(state => state.formulario);
 
-  const simularValidacionBackend = () => {
-    // Simulación simple: verifica que el número de tarjeta tenga 16 dígitos
-    // y que el CCV tenga 3 dígitos. 
-    const datosTarjetaValida = {
-      numeroTarjeta: '1234567812345678', // Cambia esto con un número de tarjeta real
-      nombreTarjeta: 'Johan Mauricio Peñuela Hidalgo', // Cambia esto con un nombre real
-      fechaExpiracion: '12/25', // Cambia esto con una fecha de expiración real
-      numeroCcv: '123', // Cambia esto con un CCV real
-    };
 
-    const esValido =
-      numeroTarjeta === datosTarjetaValida.numeroTarjeta &&
-      nombreTarjeta === datosTarjetaValida.nombreTarjeta &&
-      fechaExpiracion === datosTarjetaValida.fechaExpiracion &&
-      numeroCcv === datosTarjetaValida.numeroCcv;
-
-    return esValido;
+  const onChanceNumeroTarjeta = (event) => {
+    dispatch(actualizarCampo({ campo: 'numeroTarjeta', valor: event.target.value }));
   };
 
+  const onChanceNombreTarjeta = (event) => {
+    dispatch(actualizarCampo({ campo: 'nombreTarjeta', valor: event.target.value }));
+  };
 
-  const onChanceNumeroTarjeta =(event) => {
-    const nuevoNumeroTarjeta = event.target.value
-    setNumeroTarjeta(nuevoNumeroTarjeta)
-  }
+  const onChanceFechaExpiracionTarjeta = (event) => {
+    dispatch(actualizarCampo({ campo: 'fechaExpiracion', valor: event.target.value }));
+  };
 
-  const onChanceNombreTarjeta =(event) => {
-    const nuevoNombreTarjeta = event.target.value
-    setNombreTarjeta(nuevoNombreTarjeta)
-  }
-
-  const onChanceFechaExpiracionTarjeta =(event) => {
-    const nuevoFechaExpiracion = event.target.value
-    setFechaExpiracion(nuevoFechaExpiracion)
-  }
-
-  const onChanceCcvTarjeta =(event) => {
-    const nuevoNumeroCcv = event.target.value
-    setNumeroCcv(nuevoNumeroCcv)
-  }
+  const onChanceCcvTarjeta = (event) => {
+    dispatch(actualizarCampo({ campo: 'numeroCcv', valor: event.target.value }));
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Iniciar el spinner
-    setCargando(true);
+    dispatch(iniciarCarga());
 
     // Simular la validación del backend después de un tiempo (para simular una solicitud asíncrona)
     await new Promise(resolve => setTimeout(resolve, 2000));
 
     // Simulamos la validación del backend
-    const esValidacionExitosa = simularValidacionBackend();
+    const esValidacionExitosa =
+    numeroTarjeta.length === 16 &&
+    nombreTarjeta.length > 0 &&
+    fechaExpiracion.length === 5 &&
+    numeroCcv.length === 3;
 
     // Actualizamos el estado para reflejar el resultado de la validación
-    setResultadoValidacion(esValidacionExitosa);
+    dispatch(actualizarResultadoValidacion(esValidacionExitosa));
 
     // Detener el spinner
-    setCargando(false);
+    dispatch(finalizarCarga());
   };
 
-  
   return (
     <>
-    <form onSubmit={handleSubmit}>
-      <Tarjeta 
-        numeroTarjeta={numeroTarjeta}
-        nombreTarjeta={nombreTarjeta}
-        fechaExpiracion={fechaExpiracion} 
-        numeroCcv={numeroCcv} />
+      <form onSubmit={handleSubmit}>
+        <Tarjeta
+          numeroTarjeta={numeroTarjeta}
+          nombreTarjeta={nombreTarjeta}
+          fechaExpiracion={fechaExpiracion}
+          numeroCcv={numeroCcv}
+        />
 
         <div className='Container_input_numero'>
           <div className='container-input'>
@@ -103,19 +93,18 @@ const Formulario = () => {
           </div>
         </div>
 
-          <Button text={"Enviar"}/>
+        <Button text={"Enviar"} />
+      </form>
 
-    </form>
+      {cargando && <Spinner />}
 
-    {cargando && <Spinner />}
-
-    {resultadoValidacion !== null && !cargando && (
+      {resultadoValidacion !== null && !cargando && (
         <div className={` text-center mt-4 p-4 ${resultadoValidacion ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
           {resultadoValidacion ? '¡La validación fue exitosa!' : 'La validación falló. Verifica tus datos.'}
         </div>
       )}
     </>
-  )
+  );
 }
 
-export default Formulario
+export default Formulario;
