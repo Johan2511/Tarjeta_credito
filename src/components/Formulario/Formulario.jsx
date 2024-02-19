@@ -49,9 +49,9 @@ const Formulario = () => {
 
     // Simulamos la validación del backend
     const esValidacionExitosa =
-    numeroTarjeta.length === 16 &&
+    numeroTarjeta.length >= 12 && numeroTarjeta.length <= 16 &&
     nombreTarjeta.length > 0 &&
-    fechaExpiracion.length === 5 &&
+    fechaExpiracion.length === 6 &&
     numeroCcv.length === 3;
 
     // Actualizamos el estado para reflejar el resultado de la validación
@@ -85,7 +85,7 @@ const Formulario = () => {
         <div className='Container_input_fecha_ccv'>
           <div className='container-input'>
             <label>Fecha de expiración</label>
-            <input type="text" maxLength={5} onChange={onChanceFechaExpiracionTarjeta} />
+            <input type="text" maxLength={6} onChange={onChanceFechaExpiracionTarjeta} />
           </div>
           <div className='container-input'>
             <label>CCV</label>

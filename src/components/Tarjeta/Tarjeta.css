@@ -7,6 +7,24 @@
     color: white;
 }
 
+ .Card-front .brand-logo {
+    height: 50px;
+    display: flex;
+    justify-content: end;
+    position: absolute;
+    width: 100%;
+    top: 4em ;
+    align-items: center;
+}
+
+.Card-front .ImageLogo {
+    object-fit: cover;
+    width: 60px;
+    height: 60px;
+    margin: 15px;
+}
+
+
 .flip-card-inner {
     position: relative;
     width: 100%;

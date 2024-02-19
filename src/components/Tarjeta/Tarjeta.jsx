@@ -1,5 +1,14 @@
 import { useEffect ,useState } from 'react';
+import { 
+    FuncionNumeroTarjeta,
+    FuncionIdentificarTipoTarjeta,
+    FuncionVerificarVencimientoFecha,
+    FuncionFormatMesAño, 
+} from '../Helpers/helpers';
 import ImgChip from '../../assets/tarjeta-de-credito.png';
+import ImgVisa from '../../assets/visa.png'
+import ImgMasterCard from '../../assets/mastercard.png'
+import ImgAmericanExpress from '../../assets/american-express.png'
 import './Tarjeta.css';
 
 const Tarjeta = ({
@@ -10,6 +19,9 @@ const Tarjeta = ({
 }) => {
 
 const [changePosition , setChangePosition] = useState(false);
+const [numeroTarjetaFormat , setNumeroTarjetaFormat] = useState("");
+const [fechaExpiracionFormat , setfechaExpiracionFormat] = useState("");
+
 
 
 
@@ -21,6 +33,14 @@ useEffect ( ()=> {
     }
 },
 [numeroCcv])
+
+useEffect ( () => {
+    setNumeroTarjetaFormat(FuncionNumeroTarjeta(numeroTarjeta))
+}, [numeroTarjeta])
+
+useEffect ( () => {
+    setfechaExpiracionFormat(FuncionFormatMesAño(fechaExpiracion))
+}, [fechaExpiracion])
 
 
 
@@ -34,14 +54,27 @@ useEffect ( ()=> {
                 {/* Parte Delantera de la tarjeta */}
 
             <div className='Card-front'>
-                <div className='brand-logo'></div>
+            <div className="brand-logo">
+            {FuncionIdentificarTipoTarjeta(numeroTarjeta) === "Visa" ? (
+              <img className="ImageLogo" src={ImgVisa} alt="logo" />
+            ) : FuncionIdentificarTipoTarjeta(numeroTarjeta) ===
+              "MasterCard" ? (
+              <img className="ImageLogo" src={ImgMasterCard} alt="logo" />
+            ) : FuncionIdentificarTipoTarjeta(numeroTarjeta) ===
+              "American Express" ? (
+              <img className="ImageLogo" src={ImgAmericanExpress} alt="logo" />
+            ) : (
+              <div className="ImageLogo" />
+            )}
+          </div>
+
 
                 <img  className='chip' src= {ImgChip} alt="chip" />
 
                 <div className='Data'></div>
                 <div className='groups'>
                     <p className='Label'>Número de la Tarjeta</p>
-                    <p className='Number'>{numeroTarjeta && numeroTarjeta.length > 0 ? numeroTarjeta : "#### #### #### ####"}</p>
+                    <p className='Number'>{numeroTarjeta && numeroTarjeta.length > 0 ? numeroTarjetaFormat : "#### #### #### ####"}</p>
                 </div>
 
                 <div className='FlexBox'>
@@ -51,7 +84,7 @@ useEffect ( ()=> {
                     </div>
                     <div className='groups'>
                         <p className='Label'>Expiración</p>
-                        <p className='Expiration'>{fechaExpiracion && fechaExpiracion.length > 0 ? fechaExpiracion : "MM/AA"}</p>
+                        <p className='Expiration'>{fechaExpiracion && fechaExpiracion.length > 0 ? fechaExpiracionFormat : "MM/AA"}</p>
                     </div>
                 </div>
             </div>
