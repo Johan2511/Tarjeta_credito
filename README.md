@@ -22,3 +22,7 @@ La aplicación estará disponible en http://localhost:3000.
 Abre tu navegador y visita la URL proporcionada.
 
 Ingresa los detalles de la tarjeta de crédito en el formulario y observa la validación.
+
+# Link deploy en aws para ver su funcionamiento
+
+http://react-app-prueba-frontend-tarjeta-credito.s3-website.us-east-2.amazonaws.com/
