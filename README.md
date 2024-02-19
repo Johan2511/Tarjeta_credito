@@ -1,8 +1,24 @@
-# React + Vite
+# Validación de Tarjeta de Crédito con React y Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una aplicación simple de validación de tarjeta de crédito desarrollada con React y Vite.
 
-Currently, two official plugins are available:
+## Requisitos Previos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Antes de ejecutar la aplicación, asegúrate de tener Node.js y npm instalados en tu máquina.
+
+## Instalación
+
+1. Clona este repositorio en tu máquina local:
+
+   ```bash
+   git clone https://github.com/tu-usuario/tu-proyecto.git
+
+2.Instala las dependencias: npm install
+
+##Uso
+Inicia la aplicación en modo de desarrollo: npm run dev
+La aplicación estará disponible en http://localhost:3000.
+
+Abre tu navegador y visita la URL proporcionada.
+
+Ingresa los detalles de la tarjeta de crédito en el formulario y observa la validación.
