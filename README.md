@@ -11,7 +11,7 @@ Antes de ejecutar la aplicación, asegúrate de tener Node.js y npm instalados e
 1. Clona este repositorio en tu máquina local:
 
    ```bash
-   git clone https://github.com/tu-usuario/tu-proyecto.git
+   git clone https://github.com/tu-usuario/tu-proyecto.git](https://github.com/Johan2511/Tarjeta_credito.git
 
 2.Instala las dependencias: npm install
 
